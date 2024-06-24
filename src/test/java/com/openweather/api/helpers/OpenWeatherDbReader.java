@@ -1,4 +1,4 @@
-package com.openweather.api.data;
+package com.openweather.api.helpers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
