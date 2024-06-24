@@ -75,24 +75,13 @@ public enum OpenWeatherStatusCode {
     NETWORK_AUTHENTICATION_REQUIRED(511, "Network Authentication Required");
 
     private final int code;
-    private final String description;
 
     OpenWeatherStatusCode(int code, String description) {
         this.code = code;
-        this.description = description;
     }
 
     public int getCode() {
         return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String toString() {
-        return code + " " + description;
     }
 
     public static OpenWeatherStatusCode fromCode(int code) {
