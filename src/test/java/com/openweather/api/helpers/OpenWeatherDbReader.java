@@ -35,7 +35,7 @@ public class OpenWeatherDbReader {
         }
     }
 
-    public String getApiKey(){
+    public String getApiKey(int col){
         try{
             if(!connection.isClosed()){
                 var results = connection
@@ -48,13 +48,13 @@ public class OpenWeatherDbReader {
 
                 if(results == null ||
                         results.wasNull() ||
-                        results.getString(1).isEmpty() ||
-                        results.getString(1).isBlank()){
+                        results.getString(col).isEmpty() ||
+                        results.getString(col).isBlank()){
                     System.out.println("Failed to retrieve key from data source!");
                     return "N/A";
                 }
 
-                return results.getString(1);
+                return results.getString(col);
             }
 
             return "N/A";
