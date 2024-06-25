@@ -1,9 +1,11 @@
 package com.openweather.api.helpers;
 
+import com.openweather.api.services.IOpenWeatherDbReader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class OpenWeatherDbReader {
+public class OpenWeatherDbReader implements IOpenWeatherDbReader {
 
     private final String connString, userName, password;
     private Connection connection;
@@ -14,17 +16,17 @@ public class OpenWeatherDbReader {
         this.password = password;
     }
 
+    @Override
     public void setupConnection(){
         try{
             connection = DriverManager.getConnection(connString, userName, password);
 
             if(connection.isClosed()) {
-                System.out.println("""
+                System.out.print("""
                          The connection to the server is currently non-operational.\s
                         \s
                          Unable to proceed with acquiring the APi key.
                         \s""");
-
             }
 
         }catch (Exception ex){
@@ -35,9 +37,10 @@ public class OpenWeatherDbReader {
         }
     }
 
+    @Override
     public String getApiKey(int col){
         try{
-            if(!connection.isClosed()){
+            if(!connection.isClosed() && col > 0){
                 var results = connection
                         .createStatement()
                         .executeQuery("""
@@ -51,8 +54,13 @@ public class OpenWeatherDbReader {
                         results.getString(col).isEmpty() ||
                         results.getString(col).isBlank()){
                     System.out.println("Failed to retrieve key from data source!");
+
+                    connection.close();
+
                     return "N/A";
                 }
+
+                connection.close();
 
                 return results.getString(col);
             }
