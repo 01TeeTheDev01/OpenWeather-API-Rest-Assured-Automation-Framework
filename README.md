@@ -4,13 +4,12 @@
 This project aims to develop a testing framework for the OpenWeatherMap API (http://api.openweathermap.org). The framework will automate testing of various HTTP methods such as POST, GET, PUT, and DELETE for different endpoints provided by the API.
 
 ## Table of Contents
-- [Introduction](#weather-api-testing-framework)
-- [Setup](#setup)
-- [Endpoints Tested](#endpoints-tested)
-- [Tools Used](#tools-used)
-- [Usage](#usage)
-- [Pipeline Setup](#pipeline-setup)
-- [License](#license)
+1. [Introduction](#weather-api-testing-framework)
+2. [Setup](#setup)
+3. [Endpoints Tested](#endpoints-tested)
+4. [Tools used](#tools-used)
+5. [Usage](#usage)
+6. [Pipeline Setup](#pipeline-setup)
 
 ## Setup
 To set up the testing framework, ensure you have Java and Maven installed on your system. Clone the repository and configure the necessary dependencies in your `pom.xml` file.
@@ -69,9 +68,29 @@ The framework will cover testing of the following HTTP methods on various API en
 
 - Java: Programming language for writing the test automation scripts.
 
-- Maven: Build tool and dependency management for the project.
-- TestNG: Testing framework for unit and integration tests in Java.
-- GitHub Actions: CI/CD pipeline for automating builds, tests, and deployments.
+### Maven
+Build tool and dependency management for the project.
+
+### TestNG
+Testing framework for unit and integration tests in Java.
+
+### Rest-Assured
+Rest-Assured is a Java library that provides a fluent interface for testing and validating RESTful APIs. It allows you to easily make HTTP requests, validate responses, and perform assertions.
+
+### JSON Simple
+JSON Simple is a lightweight Java library for parsing and generating JSON (JavaScript Object Notation) data. It provides simple APIs for reading and writing JSON data, making it easy to work with JSON in Java applications.
+
+### Allure-TestNG
+Allure TestNG is an adapter for integrating Allure with the TestNG testing framework. Allure is a flexible framework designed to create detailed and comprehensive reports for test automation. It enhances test result reporting with rich visualization and analytics capabilities.
+
+### GSON: 
+Gson is a Java library that can be used to convert Java Objects into their JSON representation and vice versa. It provides methods to serialize Java objects to JSON and deserialize JSON back into Java objects.
+
+### JavaFaker
+JavaFaker is a library that generates fake data, such as names, addresses, and other types of data, which can be useful for testing and seeding databases with realistic test data. 
+
+### GitHub Actions
+CI/CD pipeline for automating builds, tests, and deployments.
 
 ## Usage
 Run the below command in the project source folder to run all tests:
@@ -112,6 +131,3 @@ A GitHub Actions pipeline has been set up to automate the build and testing proc
         - name: Run tests
           run: mvn test
 ```
-
-## License
-This project is licensed under the MIT License.
