@@ -98,13 +98,13 @@ Run the below command in the project source folder to run all tests:
 mvn test
 ```
 
-#### The framework has requires you to have a postgres serer running locally. The OpenWeatherAPi table has:
+#### The framework has requires you to have a postgres server running locally. The OpenWeatherAPi table has:
 ```text
 [Id][ApiKey]
 [1 | api key]
 ```
 
-#### You also need to create a temp text file that has the jdbc postgres connection string:
+#### You also need to create a text file that has the jdbc postgres connection string:
 ```text
 jdbc:postgresql://localhost:[your postgres port number]/OpenWeatherApi?user=yourusername&password=yourpassword
 ```
