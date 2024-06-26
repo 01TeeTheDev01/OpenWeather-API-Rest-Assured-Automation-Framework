@@ -11,9 +11,7 @@ import com.openweather.api.helpers.OpenWeatherDbReader;
 import com.openweather.api.helpers.OpenWeatherProperty;
 import com.openweather.api.services.IConfigFileReader;
 import com.openweather.api.services.IOpenWeatherDbReader;
-import io.qameta.allure.Description;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 
@@ -36,6 +34,7 @@ public class OpenWeatherStationApiTests {
 
     @Story("AS AN API USER, I CREATE A NEW WEATHER STATION WITH INCORRECT API KEY.")
     @Description("CREATE A NEW WEATHER STATION WITH INCORRECT API KEY. EXPECTED RESULT IS 401.")
+    @Severity(SeverityLevel.BLOCKER)
     public void NEGATIVE_createStationWithIncorrectApiKey(){
         //Init database
         reader.setupConnection();
@@ -76,6 +75,7 @@ public class OpenWeatherStationApiTests {
 
     @Story("AS AN API USER, I CREATE A NEW WEATHER STATION WITH OUT OF RANGE VALUES.")
     @Description("CREATE A NEW WEATHER STATION WITH OUT OF RANGE VALUES. EXPECTED RESULT IS 400.")
+    @Severity(SeverityLevel.MINOR)
     public void NEGATIVE_createStationWithOutOfRangeValues(){
         //Init database
         reader.setupConnection();
@@ -115,6 +115,7 @@ public class OpenWeatherStationApiTests {
 
     @Test(dependsOnMethods = "NEGATIVE_createStationWithOutOfRangeValues")
     @Story("AS AN API USER, I GET A WEATHER STATION FROM INVALID ID.")
+    @Severity(SeverityLevel.MINOR)
     @Description("GET WEATHER STATION FROM INVALID ID. EXPECTED RESULT IS 400.")
     public void NEGATIVE_getStationWithInvalidId(){
         //Init database
@@ -148,6 +149,7 @@ public class OpenWeatherStationApiTests {
     @Test(dependsOnMethods = "NEGATIVE_getStationWithInvalidId")
     @Story("AS AN API USER, I UPDATE WEATHER STATION WITH EMPTY OBJECT.")
     @Description("UPDATE WEATHER STATION WITH EMPTY OBJECT. EXPECTED RESULT IS 400.")
+    @Severity(SeverityLevel.MINOR)
     public void NEGATIVE_updateStation(){
         //Init database
         reader.setupConnection();
@@ -188,6 +190,7 @@ public class OpenWeatherStationApiTests {
     @Test(dependsOnMethods = "NEGATIVE_updateStation")
     @Story("AS AN API USER, I DELETE WEATHER STATION WITH INVALID ID.")
     @Description("DELETE WEATHER STATION WITH INVALID ID. EXPECTED RESULT IS 400.")
+    @Severity(SeverityLevel.MINOR)
     public void NEGATIVE_deleteStation(){
         //Init database
         reader.setupConnection();
@@ -220,6 +223,7 @@ public class OpenWeatherStationApiTests {
     @Test(dependsOnMethods = "NEGATIVE_deleteStation")
     @Story("AS AN API USER, I CREATE A NEW WEATHER STATION.")
     @Description("CREATE A NEW WEATHER STATION. EXPECTED RESULT IS 201.")
+    @Severity(SeverityLevel.NORMAL)
     public void POSITIVE_createStation(){
         //Init database
         reader.setupConnection();
@@ -260,6 +264,7 @@ public class OpenWeatherStationApiTests {
     @Test(dependsOnMethods = "POSITIVE_createStation")
     @Story("AS AN API USER, I GET A NEW WEATHER STATION.")
     @Description("GET WEATHER STATION. EXPECTED RESULT IS 200.")
+    @Severity(SeverityLevel.NORMAL)
     public void POSITIVE_getStation(){
         //Init database
         reader.setupConnection();
@@ -292,6 +297,7 @@ public class OpenWeatherStationApiTests {
     @Test(dependsOnMethods = "POSITIVE_getStation")
     @Story("AS AN API USER, I UPDATE THE NEWLY CREATED WEATHER STATION.")
     @Description("UPDATE WEATHER STATION. EXPECTED RESULT IS 200.")
+    @Severity(SeverityLevel.NORMAL)
     public void POSITIVE_updateStation(){
         //Init database
         reader.setupConnection();
@@ -332,6 +338,7 @@ public class OpenWeatherStationApiTests {
     @Test(dependsOnMethods = "POSITIVE_updateStation")
     @Story("AS AN API USER, I DELETE WEATHER STATION.")
     @Description("DELETE WEATHER STATION. EXPECTED RESULT IS 204.")
+    @Severity(SeverityLevel.NORMAL)
     public void POSITIVE_deleteStation(){
         //Init database
         reader.setupConnection();
