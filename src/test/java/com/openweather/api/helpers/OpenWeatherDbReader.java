@@ -19,9 +19,11 @@ public class OpenWeatherDbReader implements IOpenWeatherDbReader {
     @Override
     public void setupConnection(){
         try{
+
             connection = DriverManager.getConnection(connString, userName, password);
 
-            if(connection.isClosed()) {
+            if(connection == null ||
+                    connection.isClosed()) {
                 System.out.print("""
                          The connection to the server is currently non-operational.\s
                         \s
@@ -40,19 +42,19 @@ public class OpenWeatherDbReader implements IOpenWeatherDbReader {
     @Override
     public String getApiKey(int col){
         try{
-            if(!connection.isClosed() && col > 0){
+            if(connection != null &&
+                    !connection.isClosed() &&
+                    col > 0){
                 var results = connection
                         .createStatement()
                         .executeQuery("""
                     select *
                     from public."OpenWeather"
-                    where Id = 1;
+                    where "Id" = 1;
                     """);
 
                 if(results == null ||
-                        results.wasNull() ||
-                        results.getString(col).isEmpty() ||
-                        results.getString(col).isBlank()){
+                        results.wasNull()){
                     System.out.println("Failed to retrieve key from data source!");
 
                     connection.close();
@@ -60,9 +62,14 @@ public class OpenWeatherDbReader implements IOpenWeatherDbReader {
                     return "N/A";
                 }
 
+                String apiKey = null;
+
+                while(results.next())
+                    apiKey = results.getString(2);
+
                 connection.close();
 
-                return results.getString(col);
+                return apiKey;
             }
 
             return "N/A";
