@@ -7,20 +7,18 @@ import java.sql.DriverManager;
 
 public class OpenWeatherDbReader implements IOpenWeatherDbReader {
 
-    private final String connString, userName, password;
+    private final String configString;
     private Connection connection;
 
-    public OpenWeatherDbReader(String connString, String userName, String password) {
-        this.connString = connString;
-        this.userName = userName;
-        this.password = password;
+    public OpenWeatherDbReader(String configString) {
+        this.configString = configString;
     }
 
     @Override
     public void setupConnection(){
         try{
 
-            connection = DriverManager.getConnection(connString, userName, password);
+            connection = DriverManager.getConnection(configString);
 
             if(connection == null ||
                     connection.isClosed()) {

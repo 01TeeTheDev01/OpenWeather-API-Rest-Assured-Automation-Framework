@@ -6,8 +6,10 @@ import com.openweather.api.builder.OpenWeatherRequestBuilder;
 import com.openweather.api.builder.WeatherStationBuilder;
 import com.openweather.api.common.OpenWeatherQueryParam;
 import com.openweather.api.common.OpenWeatherStatusCode;
+import com.openweather.api.helpers.ConfigFileReader;
 import com.openweather.api.helpers.OpenWeatherDbReader;
 import com.openweather.api.helpers.OpenWeatherProperty;
+import com.openweather.api.services.IConfigFileReader;
 import com.openweather.api.services.IOpenWeatherDbReader;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -23,10 +25,10 @@ public class OpenWeatherStationApiTests {
     private final Faker faker;
 
     public OpenWeatherStationApiTests(){
+        IConfigFileReader configFileReader = new ConfigFileReader();
+
         reader = new OpenWeatherDbReader(
-                "",
-                "",
-                ""
+                configFileReader.getConfigFromFile("C:\\Temp\\OpenWeatherConfig.txt")
         );
 
         faker = new Faker();
