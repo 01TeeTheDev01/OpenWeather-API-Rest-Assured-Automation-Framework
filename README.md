@@ -1,4 +1,4 @@
-# Weather API Testing Framework
+# OpenWeather API Rest-Assured Automation Framework
 
 ## Description
 This project aims to develop a testing framework for the OpenWeatherMap API (http://api.openweathermap.org). The framework will automate testing of various HTTP methods such as POST, GET, PUT, and DELETE for different endpoints provided by the API.
