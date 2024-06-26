@@ -27,7 +27,7 @@ public class OpenWeatherDbReader implements IOpenWeatherDbReader {
                 System.out.print("""
                          The connection to the server is currently non-operational.\s
                         \s
-                         Unable to proceed with acquiring the APi key.
+                         Unable to proceed with acquiring the API key.
                         \s""");
             }
 

@@ -5,7 +5,8 @@ import com.openweather.api.models.WeatherStation;
 public class WeatherStationBuilder {
 
     private final String externalId, name;
-    private final double latitude, longitude;
+    private final double latitude;
+    private final double longitude;
     private final int altitude;
 
     public WeatherStationBuilder(){
@@ -33,21 +34,28 @@ public class WeatherStationBuilder {
     }
 
     public WeatherStationBuilder withLatitude(double latitude){
-        if(latitude < -90)
+        /*double minLatitude = -90;
+
+        if(latitude < minLatitude)
             return new WeatherStationBuilder(externalId, name, -90, longitude, altitude);
 
-        if(latitude > 90)
-            return new WeatherStationBuilder(externalId, name, 90, longitude, altitude);
+        double maxLatitude = 90;
+        if(latitude > maxLatitude)
+            return new WeatherStationBuilder(externalId, name, 90, longitude, altitude);*/
 
         return new WeatherStationBuilder(externalId, name, latitude, longitude, altitude);
     }
 
     public WeatherStationBuilder withLongitude(double longitude){
-        if(longitude < -180.0)
+        /*double minLongitude = -180;
+
+        if(longitude < minLongitude)
             return new WeatherStationBuilder(externalId, name, latitude, -180, altitude);
 
-        if(longitude > 180.0)
-            return new WeatherStationBuilder(externalId, name, latitude, 180, altitude);
+        double maxLongitude = 180;
+
+        if(longitude > maxLongitude)
+            return new WeatherStationBuilder(externalId, name, latitude, 180, altitude);*/
 
         return new WeatherStationBuilder(externalId, name, latitude, longitude, altitude);
     }

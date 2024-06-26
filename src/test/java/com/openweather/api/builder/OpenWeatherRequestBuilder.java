@@ -1,5 +1,6 @@
 package com.openweather.api.builder;
 
+import com.google.gson.Gson;
 import com.openweather.api.common.OpenWeatherBaseEndpoint;
 import com.openweather.api.common.OpenWeatherBasePath;
 import com.openweather.api.common.OpenWeatherQueryParam;
@@ -56,13 +57,50 @@ public class OpenWeatherRequestBuilder {
                         OpenWeatherBaseEndpoint.ENDPOINT,
                         openWeatherQueryParam[1].getQueryParam());
 
-        return given()
+        var response =
+                given()
                 .queryParam("appid", openWeatherQueryParam[0].getQueryParam())
                 .contentType(ContentType.JSON)
                 .get(url)
                 .then()
                 .extract()
                 .response();
+
+        OpenWeatherProperty.weatherStation = new Gson().fromJson(response.getBody().asPrettyString(), WeatherStation.class);
+
+        return response;
+    }
+
+    public static Response updateStation(OpenWeatherQueryParam[] openWeatherQueryParam){
+
+        if(openWeatherQueryParam == null ||
+                openWeatherQueryParam[0].getQueryParam().isEmpty() ||
+                openWeatherQueryParam[0].getQueryParam().isBlank() ||
+                openWeatherQueryParam[1].getQueryParam().isEmpty() ||
+                openWeatherQueryParam[1].getQueryParam().isBlank() ||
+                openWeatherQueryParam[2].getQueryParam().isEmpty() ||
+                openWeatherQueryParam[2].getQueryParam().isBlank())
+            return null;
+
+        String url =
+                String.format("%s%s/%s",
+                        OpenWeatherBasePath.baseUrl,
+                        OpenWeatherBaseEndpoint.ENDPOINT,
+                        openWeatherQueryParam[1].getQueryParam());
+
+        var response =
+                given()
+                        .queryParam("appid", openWeatherQueryParam[0].getQueryParam())
+                        .contentType(ContentType.JSON)
+                        .body(openWeatherQueryParam[2].getQueryParam())
+                        .put(url)
+                        .then()
+                        .extract()
+                        .response();
+
+        OpenWeatherProperty.weatherStation = new Gson().fromJson(response.getBody().asPrettyString(), WeatherStation.class);
+
+        return response;
     }
 
     public static Response deleteStation(OpenWeatherQueryParam[] openWeatherQueryParam){
