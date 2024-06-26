@@ -98,6 +98,34 @@ Run the below command in the project source folder to run all tests:
 mvn test
 ```
 
+#### The framework has requires you to have a postgres serer running locally. The OpenWeatherAPi table has:
+```text
+[Id][ApiKey]
+[1 | api key]
+```
+
+#### You also need to create a temp text file that has the jdbc postgres connection string:
+```text
+jdbc:postgresql://localhost:[your postgres port number]/OpenWeatherApi?user=yourusername&password=yourpassword
+```
+
+#### Example:
+```java
+public class Foo {
+
+    private final IOpenWeatherDbReader reader;
+    private final Faker faker;
+
+    public Foo(){
+        IConfigFileReader configFileReader = new ConfigFileReader();
+
+        reader = new OpenWeatherDbReader(configFileReader.getConfigFromFile("[full file path].txt"));
+
+        faker = new Faker();
+    }
+}
+```
+
 ## Pipeline Setup
 A GitHub Actions pipeline has been set up to automate the build and testing process. The pipeline configuration (yaml file) can be found in the .github/workflows directory of this repository. Here’s a basic example of a pipeline configuration:
 
