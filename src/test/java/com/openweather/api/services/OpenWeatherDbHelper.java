@@ -1,16 +1,16 @@
 package com.openweather.api.services;
 
-import com.openweather.api.repositories.IOpenWeatherDbReader;
+import com.openweather.api.repositories.IOpenWeatherDbHelper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class OpenWeatherDbReader implements IOpenWeatherDbReader {
+public class OpenWeatherDbHelper implements IOpenWeatherDbHelper {
 
     private final String configString;
     private Connection connection;
 
-    public OpenWeatherDbReader(String configString) {
+    public OpenWeatherDbHelper(String configString) {
         this.configString = configString;
     }
 

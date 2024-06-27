@@ -7,10 +7,10 @@ import com.openweather.api.builders.WeatherStationBuilder;
 import com.openweather.api.common.OpenWeatherQueryParam;
 import com.openweather.api.common.OpenWeatherStatusCode;
 import com.openweather.api.services.ConfigFileReader;
-import com.openweather.api.services.OpenWeatherDbReader;
+import com.openweather.api.services.OpenWeatherDbHelper;
 import com.openweather.api.util.OpenWeatherProperty;
 import com.openweather.api.repositories.IConfigFileReader;
-import com.openweather.api.repositories.IOpenWeatherDbReader;
+import com.openweather.api.repositories.IOpenWeatherDbHelper;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
@@ -21,7 +21,7 @@ import java.util.HashMap;
 @Feature("OpenWeather API")
 public class OpenWeatherStationApiTests {
 
-    private final IOpenWeatherDbReader reader;
+    private final IOpenWeatherDbHelper reader;
     private final Faker faker;
     private final HashMap<String, OpenWeatherQueryParam> params;
 
@@ -29,7 +29,7 @@ public class OpenWeatherStationApiTests {
         params = new HashMap<>();
         faker = new Faker();
         IConfigFileReader configFileReader = new ConfigFileReader();
-        reader = new OpenWeatherDbReader(
+        reader = new OpenWeatherDbHelper(
                 configFileReader.getConfigFromFile("C:\\Temp\\OpenWeatherConfig.txt")
         );
     }
