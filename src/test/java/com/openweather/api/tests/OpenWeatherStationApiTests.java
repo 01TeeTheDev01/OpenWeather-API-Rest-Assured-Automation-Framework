@@ -110,10 +110,6 @@ public class OpenWeatherStationApiTests {
                 OpenWeatherRequestBuilder
                         .createStation(params, weatherStation);
 
-        //Check response
-        if(response == null)
-            return;
-
         //Validate response
         response
                 .then()
@@ -141,10 +137,6 @@ public class OpenWeatherStationApiTests {
         var response =
                 OpenWeatherRequestBuilder
                         .getStation(params);
-
-        //Check response
-        if(response == null)
-            return;
 
         //Validate response
         response
@@ -182,10 +174,6 @@ public class OpenWeatherStationApiTests {
                 OpenWeatherRequestBuilder
                         .updateStation(params);
 
-        //Check response
-        if(response == null)
-            return;
-
         //Validate response
         response
                 .then()
@@ -213,10 +201,6 @@ public class OpenWeatherStationApiTests {
         var response =
                 OpenWeatherRequestBuilder
                         .deleteStation(params);
-
-        //Check response
-        if(response == null)
-            return;
 
         //Validate response
         response
@@ -259,10 +243,6 @@ public class OpenWeatherStationApiTests {
                 OpenWeatherRequestBuilder
                         .createStation(params, weatherStation);
 
-        //Check response
-        if(response == null)
-            return;
-
         //Validate response
         response
                 .then()
@@ -290,10 +270,6 @@ public class OpenWeatherStationApiTests {
         var response =
                 OpenWeatherRequestBuilder
                         .getStation(params);
-
-        //Check response
-        if(response == null)
-            return;
 
         //Validate response
         response
@@ -331,10 +307,6 @@ public class OpenWeatherStationApiTests {
                 OpenWeatherRequestBuilder
                         .updateStation(params);
 
-        //Check response
-        if(response == null)
-            return;
-
         //Validate response
         response
                 .then()
@@ -362,10 +334,6 @@ public class OpenWeatherStationApiTests {
         var response =
                 OpenWeatherRequestBuilder
                         .deleteStation(params);
-
-        //Check response
-        if(response == null)
-            return;
 
         //Validate response
         response
