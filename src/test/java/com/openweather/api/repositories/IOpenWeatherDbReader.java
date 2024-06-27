@@ -1,4 +1,4 @@
-package com.openweather.api.services;
+package com.openweather.api.repositories;
 
 public interface IOpenWeatherDbReader {
     void setupConnection();

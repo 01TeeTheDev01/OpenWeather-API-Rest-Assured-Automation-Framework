@@ -1,6 +1,6 @@
-package com.openweather.api.helpers;
+package com.openweather.api.services;
 
-import com.openweather.api.services.IOpenWeatherDbReader;
+import com.openweather.api.repositories.IOpenWeatherDbReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

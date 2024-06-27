@@ -1,6 +1,6 @@
-package com.openweather.api.helpers;
+package com.openweather.api.services;
 
-import com.openweather.api.services.IConfigFileReader;
+import com.openweather.api.repositories.IConfigFileReader;
 
 import java.io.*;
 

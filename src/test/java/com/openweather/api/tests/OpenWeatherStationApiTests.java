@@ -2,15 +2,15 @@ package com.openweather.api.tests;
 
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
-import com.openweather.api.builder.OpenWeatherRequestBuilder;
-import com.openweather.api.builder.WeatherStationBuilder;
+import com.openweather.api.builders.OpenWeatherRequestBuilder;
+import com.openweather.api.builders.WeatherStationBuilder;
 import com.openweather.api.common.OpenWeatherQueryParam;
 import com.openweather.api.common.OpenWeatherStatusCode;
-import com.openweather.api.helpers.ConfigFileReader;
-import com.openweather.api.helpers.OpenWeatherDbReader;
-import com.openweather.api.helpers.OpenWeatherProperty;
-import com.openweather.api.services.IConfigFileReader;
-import com.openweather.api.services.IOpenWeatherDbReader;
+import com.openweather.api.services.ConfigFileReader;
+import com.openweather.api.services.OpenWeatherDbReader;
+import com.openweather.api.util.OpenWeatherProperty;
+import com.openweather.api.repositories.IConfigFileReader;
+import com.openweather.api.repositories.IOpenWeatherDbReader;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 

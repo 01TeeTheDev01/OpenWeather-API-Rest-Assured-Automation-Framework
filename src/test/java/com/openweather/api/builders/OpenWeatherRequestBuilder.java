@@ -1,10 +1,10 @@
-package com.openweather.api.builder;
+package com.openweather.api.builders;
 
 import com.google.gson.Gson;
 import com.openweather.api.common.OpenWeatherBaseEndpoint;
 import com.openweather.api.common.OpenWeatherBasePath;
 import com.openweather.api.common.OpenWeatherQueryParam;
-import com.openweather.api.helpers.OpenWeatherProperty;
+import com.openweather.api.util.OpenWeatherProperty;
 import com.openweather.api.models.WeatherStation;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

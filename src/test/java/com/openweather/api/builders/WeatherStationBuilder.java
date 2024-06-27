@@ -1,4 +1,4 @@
-package com.openweather.api.builder;
+package com.openweather.api.builders;
 
 import com.openweather.api.models.WeatherStation;
 
