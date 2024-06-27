@@ -14,6 +14,8 @@ import com.openweather.api.services.IOpenWeatherDbReader;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+
 
 @Test
 @Feature("OpenWeather API")
@@ -21,15 +23,15 @@ public class OpenWeatherStationApiTests {
 
     private final IOpenWeatherDbReader reader;
     private final Faker faker;
+    private final HashMap<String, OpenWeatherQueryParam> params;
 
     public OpenWeatherStationApiTests(){
+        params = new HashMap<>();
+        faker = new Faker();
         IConfigFileReader configFileReader = new ConfigFileReader();
-
         reader = new OpenWeatherDbReader(
                 configFileReader.getConfigFromFile("C:\\Temp\\OpenWeatherConfig.txt")
         );
-
-        faker = new Faker();
     }
 
     @Story("AS AN API USER, I CREATE A NEW WEATHER STATION WITH INCORRECT API KEY.")
@@ -43,6 +45,9 @@ public class OpenWeatherStationApiTests {
         var apiKey = String.format("%sg",
                 reader.getApiKey(1)
         );
+
+        //Add key to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
 
         //Build station
         var weatherBuilder =
@@ -60,7 +65,7 @@ public class OpenWeatherStationApiTests {
         //Send POST
         var response =
                 OpenWeatherRequestBuilder
-                        .createStation(new OpenWeatherQueryParam(apiKey), weatherStation);
+                        .createStation(params, weatherStation);
 
         //Check response
         if(response == null)
@@ -84,6 +89,9 @@ public class OpenWeatherStationApiTests {
         var apiKey = reader
                 .getApiKey(1);
 
+        //Add key to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+
         //Build station
         var weatherBuilder =
                 new WeatherStationBuilder();
@@ -100,7 +108,7 @@ public class OpenWeatherStationApiTests {
         //Send POST
         var response =
                 OpenWeatherRequestBuilder
-                        .createStation(new OpenWeatherQueryParam(apiKey), weatherStation);
+                        .createStation(params, weatherStation);
 
         //Check response
         if(response == null)
@@ -124,11 +132,10 @@ public class OpenWeatherStationApiTests {
         //Get Api key
         var apiKey = reader
                 .getApiKey(1);
-        
-        var params = new OpenWeatherQueryParam[]{
-                new OpenWeatherQueryParam(apiKey),
-                new OpenWeatherQueryParam(faker.idNumber().valid())
-        };
+
+        //Add keys to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+        params.put("id", new OpenWeatherQueryParam(faker.idNumber().valid()));
 
         //Send GET
         var response =
@@ -158,18 +165,17 @@ public class OpenWeatherStationApiTests {
         var apiKey = reader
                 .getApiKey(1);
 
+        //Add keys to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+        params.put("id", new OpenWeatherQueryParam(String.valueOf(faker.number().randomNumber())));
+        params.put("empty_data", new OpenWeatherQueryParam(new Gson().toJson(null)));
+
         OpenWeatherProperty
                 .weatherStation
                 .setName(String.format(
                         "%s TEST STATION",
                         faker.company().name().toUpperCase())
                 );
-
-        var params = new OpenWeatherQueryParam[]{
-                new OpenWeatherQueryParam(apiKey),
-                new OpenWeatherQueryParam(String.valueOf(faker.number().randomNumber())),
-                new OpenWeatherQueryParam(new Gson().toJson(null))
-        };
 
         //Send PUT
         var response =
@@ -199,10 +205,9 @@ public class OpenWeatherStationApiTests {
         var apiKey = reader
                 .getApiKey(1);
 
-        var params = new OpenWeatherQueryParam[]{
-                new OpenWeatherQueryParam(apiKey),
-                new OpenWeatherQueryParam(String.valueOf(faker.number().randomNumber()))
-        };
+        //Add keys to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+        params.put("id", new OpenWeatherQueryParam(String.valueOf(faker.number().randomNumber())));
 
         //Send DELETE
         var response =
@@ -232,23 +237,27 @@ public class OpenWeatherStationApiTests {
         var apiKey = reader
                 .getApiKey(1);
 
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+
         //Build station
         var weatherBuilder =
                 new WeatherStationBuilder();
+
+        int minLat = -90, maxLat = 90, minLong = -180, maxLong = 180;
 
         var weatherStation =
                 weatherBuilder
                         .withExternalId("SF_TEST099")
                         .withName("San Francisco Test Station")
-                        .withLatitude(50.51)
-                        .withLongitude(99.15)
+                        .withLatitude(faker.number().randomDouble(2, minLat, maxLat))
+                        .withLongitude(faker.number().randomDouble(2, minLong, maxLong))
                         .withAltitude(22)
                         .build();
 
         //Send POST
         var response =
                 OpenWeatherRequestBuilder
-                        .createStation(new OpenWeatherQueryParam(apiKey), weatherStation);
+                        .createStation(params, weatherStation);
 
         //Check response
         if(response == null)
@@ -273,10 +282,9 @@ public class OpenWeatherStationApiTests {
         var apiKey = reader
                 .getApiKey(1);
 
-        var params = new OpenWeatherQueryParam[]{
-                new OpenWeatherQueryParam(apiKey),
-                new OpenWeatherQueryParam(OpenWeatherProperty.stationId)
-        };
+        //Add keys to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+        params.put("id", new OpenWeatherQueryParam(OpenWeatherProperty.stationId));
 
         //Send GET
         var response =
@@ -313,11 +321,10 @@ public class OpenWeatherStationApiTests {
                         faker.company().name().toUpperCase())
                 );
 
-        var params = new OpenWeatherQueryParam[]{
-                new OpenWeatherQueryParam(apiKey),
-                new OpenWeatherQueryParam(OpenWeatherProperty.stationId),
-                new OpenWeatherQueryParam(new Gson().toJson(OpenWeatherProperty.weatherStation))
-        };
+        //Add keys to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+        params.put("id", new OpenWeatherQueryParam(OpenWeatherProperty.stationId));
+        params.put("empty_data", new OpenWeatherQueryParam(new Gson().toJson(OpenWeatherProperty.weatherStation)));
 
         //Send PUT
         var response =
@@ -347,10 +354,9 @@ public class OpenWeatherStationApiTests {
         var apiKey = reader
                 .getApiKey(1);
 
-        var params = new OpenWeatherQueryParam[]{
-                new OpenWeatherQueryParam(apiKey),
-                new OpenWeatherQueryParam(OpenWeatherProperty.stationId)
-        };
+        //Add keys to dictionary
+        params.put("apiKey", new OpenWeatherQueryParam(apiKey));
+        params.put("id", new OpenWeatherQueryParam(OpenWeatherProperty.stationId));
 
         //Send DELETE
         var response =
